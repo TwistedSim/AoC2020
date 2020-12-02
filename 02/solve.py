@@ -1,4 +1,4 @@
-
+import re
 from collections import namedtuple
 
 Password = namedtuple('Password', 'password, letter, min, max')
@@ -10,15 +10,13 @@ def validate_new(item):
     return (item.password[item.min-1] == item.letter) ^ (item.password[item.max-1] == item.letter)
 
 with open('input.txt', 'r') as file:
-    data = list(file.read().strip().split('\n'))
+    raw_data = file.read().strip()
+
+pattern = re.compile(r'([0-9]+)\-([0-9]+)\s([a-z])\:\s([a-z]+)')
 
 passwords = [
-    Password(
-         min = int(d.split('-')[0]),
-         max = int(d.split('-')[1].split(' ')[0]),
-        password = d.split(': ')[1],
-          letter = d.split(':')[0].split(' ')[1]
-     ) for d in data
+    Password(password, letter, int(min_), int(max_)) 
+    for min_, max_, letter, password in re.findall(pattern, raw_data)
 ]
 
 print(len(list(filter(validate, passwords))))
