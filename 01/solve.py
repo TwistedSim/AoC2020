@@ -1,4 +1,5 @@
 import math 
+import time
 
 def find_pair(data, target):
     pairs = {}
@@ -23,6 +24,5 @@ with open('input.txt', 'r') as file:
     data = list(map(int, file.read().strip().split('\n')))
 
 print(*(k[0]*k[1] for k in find_pair(data, 2020)))
-
-
 print(*(k[0]*k[1]*k[2] for k in find_triplet(data, 2020)))
+
