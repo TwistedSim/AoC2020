@@ -6,9 +6,9 @@ validators = {
     'iyr': lambda x: 2010 <= int(x) <= 2020,
     'eyr': lambda x: 2020 <= int(x) <= 2030,
     'hgt': lambda x: (150 <= int(x.replace('cm', '')) <= 193) if 'cm' in x else (59 <= int(x.replace('in', '')) <= 76),
-    'hcl': lambda x: len(x) == 7 and re.search(r'\#[a-f0-9]{6}', x) is not None,
+    'hcl': lambda x: re.search(r'^\#[a-f0-9]{6}$', x),
     'ecl': lambda x: x in ( 'amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'),
-    'pid': lambda x: len(x) == 9 and re.search(r'\d{9}', x) is not None,
+    'pid': lambda x: re.search(r'^\d{9}$', x),
     'cid': lambda x: True,
 }
 
