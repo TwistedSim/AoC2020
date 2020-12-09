@@ -29,14 +29,12 @@ class GameBoy:
     def fetch(self):
         opcode, value = self.instr[self.pc].split(' ')
         self.opcode = self.OPS[opcode]
-        
-        self.pc += 1
-
         return int(value)
 
     def compute(self):
         while self.pc < len(self.instr):
             args = self.fetch()  
+            self.pc += 1
             yield self.opcode(args) 
         self.finished = True
 
